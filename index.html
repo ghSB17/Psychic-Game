@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>The Psychic Game</title>
+    <!-- <style>
+        body {
+            background-color: lightgray; 
+            animation: mymove 15s infinite;
+            animation-direction: alternate;
+        }
+        @-webkit-keyframes mymove {
+
+            0%   {background-color: #EAEDED;}
+            50%  {background-color: #A9CCE3;}
+            100% {background-color: #5DADE2;}
+        }
+
+        @keyframes mymove {
+            0%   {background-color: #EAEDED;}
+            50%  {background-color: #A9CCE3;}
+            100% {background-color: #5DADE2;}
+        }
+
+    </style> -->
+</head>
+<body>
+    
+    <p class="text-center h1"> The Psychic Game</p>
+    <div class="container border border-dark text-center h4 mt-5 mb-5 pt-5 pb-5 rounded" >
+        <p>
+            Wins:
+            <span id="idWins">0</span>
+        </p>
+        <p>
+            Loses:
+            <span id="idLoses">0</span>
+        </p>
+        <p>
+            Guesses Left:
+            <span id="idGuessesLeft">9</span>
+        </p>
+        <p>
+            Your Guesses So Far:
+            <span id="idGuessesSoFar"></span>
+        </p>
+    </div>
+    
+    <script >
+    var wins = document.getElementById("idWins");
+    var loses = document.getElementById("idLoses");
+    var guessesLeft = document.getElementById("idGuessesLeft");
+    var guessesSoFar = document.getElementById("idGuessesSoFar");
+
+    var vWins = 0;
+    var vLoses = 0;
+    var vGuessesLeft = 9;
+    var vGuessesSoFar = "";
+    var vGuess = "";
+    var vKeyCode = 0;
+    var vKeyInput = "";
+
+    document.onkeyup = function(event) { 
+                            myFunction(event) };
+    function myFunction(event) {
+        if( vGuessesLeft === 9)
+            vGuess = String.fromCharCode( Math.floor( Math.random()*26 ) +97) ;
+        console.log("here");
+        vKeyCode = event.keyCode;
+        if ( (vKeyCode >= 97 && vKeyCode <=123) || 
+              ((vKeyCode >= 65 && vKeyCode <=90)) ) 
+        {
+
+            vKeyInput = event.key.toLowerCase();
+            if( vGuess === vKeyInput ) {
+                vWins++;
+                vGuessesLeft=9;
+                vGuessesSoFar="";
+            } else {
+                vGuessesLeft--;
+                if( vGuessesLeft === 0 ) {
+                    vLoses++;
+                    vGuessesLeft=9;
+                    vGuessesSoFar="";
+                } else {
+                    if( vGuessesLeft=== 8)
+                        vGuessesSoFar += "  " + vKeyInput;
+                    else 
+                        vGuessesSoFar += ", " + vKeyInput
+                }
+            }
+        
+        }
+        
+        console.log( "press: "+vKeyInput);
+        console.log( "guess: " +vGuess);
+        wins.textContent = vWins;
+        loses.textContent = vLoses;
+        guessesLeft.textContent = vGuessesLeft;
+        guessesSoFar.textContent = vGuessesSoFar;
+
+    }
+
+    // document.onkeyup = funcPsychic(event);
+    
+    // function funcPsychic(event) {
+    //     var guess = String.fromCharCode( Math.floor( Math.random*26 ) +97) ;
+    //     var input = event.key
+    //     console.log( "INPUT: "+input );
+    //     console.log( "GUESS: "+guess );
+
+        // if( input.toLowerCase().charCOde(0) >96 &&  )
+        // if( guess === event.key ) {
+        //     vWins++ ;
+        //     vGL = 9;
+        //     vGSF ="";
+        // } else
+        // {
+        //     if()
+
+        // }
+
+
+        //     var press= event.key;
+        //     console.log("came here ");
+        //     document.getElementById("test").innerHTML="\ntest case working:  "+ press +"\n";
+</script >
+      <!-- var k = '';
+        
+      function myFunction(event) {
+        var x = event.key;
+
+ If the pressed keyboard button is "a" or "A" (using caps lock or shift), alert some text.
+       
+     if (x == "a" || x == "A") { 
+         alert ("You pressed the 'A' key!");
+     }
+ }    -->
+    
+</body>
+</html>
